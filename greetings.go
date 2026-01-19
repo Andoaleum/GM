@@ -39,7 +39,7 @@ func randomFormat() string {
 }
 
 var bannedWords = []string{
- "hitler",  "satan", "nigger", "slave", "bitch", "slut", "rape","rapist","cunt","pussy","cp","pedophilia","pedophile","blowjob","doggy-style","cow-girl",
+
 }
 
 func censorBadWord(text string, showScore bool) string{
@@ -85,4 +85,5 @@ func diffAnal(word1 string, word2 string) float32{
 		}
 	}
 	return float32(confi)
+
 }
