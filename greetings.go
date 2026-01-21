@@ -38,14 +38,12 @@ func randomFormat() string {
 	return format;
 }
 
-var bannedWords = []string{
-
-}
+var bannedWords = []string{}
 
 func censorBadWord(text string, showScore bool) string{
 	words := strings.Fields(text)
 	outstring := ""
-
+	if(len(bannedWords) == 0) {return ""}
 	for i:=0; i < len(words); i++{
 		currentWord := words[i]
 		lower := strings.ToLower(currentWord)
@@ -55,9 +53,9 @@ func censorBadWord(text string, showScore bool) string{
 
 			
 			if(strings.Contains(lower,bannedWord)||diffAnal(lower,bannedWord)>=6.3){
-
-				stars := strings.Repeat("*",len(bannedWords[j])-1)
-				if(showScore) {outstring = fmt.Sprintf("%v %v%v(%v)",outstring,string(bannedWord[0]),stars,diffAnal(lower,bannedWord));}else{outstring = fmt.Sprintf("%v %v%v",outstring,string(bannedWord[0]),stars);}
+				stars:=""
+				if(len(bannedWords[j])-1>0){stars = strings.Repeat("*",len(bannedWords[j])-1)}
+				if(len(bannedWord)>0){if(showScore) {outstring = fmt.Sprintf("%v %v%v(%v)",outstring,string(bannedWord[0]),stars,diffAnal(lower,bannedWord));}else{outstring = fmt.Sprintf("%v %v%v",outstring,string(bannedWord[0]),stars);}}
 				censored = true
 				break
 			}
@@ -85,5 +83,4 @@ func diffAnal(word1 string, word2 string) float32{
 		}
 	}
 	return float32(confi)
-
 }
